@@ -31,6 +31,7 @@ public class Expense
 	[ForeignKey("CategoryId")]
 	public Category? Category { get; set; }
 
+	[InverseProperty("Expense")]
 	public ICollection<Share> Shares { get; set; } = new List<Share>();
 	
 }

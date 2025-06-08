@@ -284,7 +284,6 @@ C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\Budg
 C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\scopedcss\bundle\BudgetPlus.styles.css
 C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\scopedcss\projectbundle\BudgetPlus.bundle.scp.css
-C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\compressed\idk63zgc2y-b9sayid5wm.gz
 C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\compressed\ttjk5zdcyu-61n19gt1b8.gz
 C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\compressed\wfqu9q1n94-xtxxf3hu2r.gz
 C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\compressed\126hhystmk-bqjiyaj88i.gz
@@ -346,8 +345,6 @@ C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\Budg
 C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\compressed\194lkvza96-muycvpuwrr.gz
 C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\compressed\p612onvclg-87fc7y1x7t.gz
 C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\compressed\t0yn29uyc9-mlv21k5csn.gz
-C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\compressed\px9i3o1ecu-ngi133djl9.gz
-C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\compressed\3jbuhbk2xz-ngi133djl9.gz
 C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\staticwebassets.build.endpoints.json
@@ -363,3 +360,10 @@ C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\Budg
 C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\BudgetPlus.pdb
 C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\BudgetPlus.genruntimeconfig.cache
 C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\ref\BudgetPlus.dll
+C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\BudgetPlus.sourcelink.json
+C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\bin\Debug\net9.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\bin\Debug\net9.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
+C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\bin\Debug\net9.0\Newtonsoft.Json.Bson.dll
+C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\compressed\px9i3o1ecu-ngi133djl9.gz
+C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\compressed\3jbuhbk2xz-ngi133djl9.gz
+C:\Users\wstas\Studia\studia semestr 4\Programowanie zaawansowane 2\project\BudgetPlus\obj\Debug\net9.0\compressed\idk63zgc2y-rbusguyqto.gz

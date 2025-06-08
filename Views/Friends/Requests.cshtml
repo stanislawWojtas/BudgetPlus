@@ -1,0 +1,24 @@
+@model IEnumerable<BudgetPlus.Models.FriendRequest>
+
+<h2>Friend Requests</h2>
+
+@if (!Model.Any())
+{
+    <p>No pending friend requests.</p>
+}
+else
+{
+    <div class="list-group">
+        @foreach (var request in Model)
+        {
+            <div class="list-group-item">
+                <h5>Request from @request.Sender.Username</h5>
+                <form asp-action="RespondToRequest" method="post" style="display: inline;">
+                    <input type="hidden" name="requestId" value="@request.Id" />
+                    <button type="submit" name="accept" value="true" class="btn btn-success">Accept</button>
+                    <button type="submit" name="accept" value="false" class="btn btn-danger">Reject</button>
+                </form>
+            </div>
+        }
+    </div>
+}

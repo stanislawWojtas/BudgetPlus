@@ -1,0 +1,37 @@
+@model IEnumerable<BudgetPlus.Models.Share>
+
+@{
+    ViewData["Title"] = "My Expenses";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>My Expenses</h1>
+    <div class="card bg-primary text-white p-3">
+        <h5 class="mb-0">Total Expenses</h5>
+        <h3 class="mb-0">@ViewBag.TotalExpenses.ToString("C")</h3>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Created By</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Expense?.Date.ToString("dd/MM/yyyy")</td>
+                <td>@item.Expense?.Description</td>
+                <td>@item.Expense?.Category?.Name</td>
+                <td>@item.Expense?.User?.Username</td>
+                <td>@item.Amount.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>

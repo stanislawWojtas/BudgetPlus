@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace BudgetPlus.Models;
 
@@ -21,6 +22,7 @@ public class Share
 	public bool isPaid { get; set; } = false;
 
 	[ForeignKey("ExpenseId")]
+	[DeleteBehavior(DeleteBehavior.Cascade)]
 	public Expense? Expense { get; set; }
 
 	[ForeignKey("OwedUserId")]

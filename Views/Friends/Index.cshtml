@@ -1,41 +1,60 @@
-@model IEnumerable<BudgetPlus.Models.Friend>
+@model IEnumerable<BudgetPlus.ViewModels.FriendBalanceViewModel>
 
-@{
-    ViewData["Title"] = "Index";
-}
-
-<h1>Index</h1>
+<h1>Friends</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="SendRequest" class="btn btn-primary">Send Friend Request</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FriendUser)
-            </th>
-            <th></th>
+            <th>Username</th>
+            <th>Balance</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Username)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FriendUser.Username)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Friend.Username</td>
+                <td>
+                    @if (item.Balance == 0)
+                    {
+                        <span>Settled up</span>
+                    }
+                    else if (item.Balance > 0)
+                    {
+                        <span class="text-success">@item.Balance.ToString("C") (they owe you)</span>
+                    }
+                    else
+                    {
+                        <span class="text-danger">@((-item.Balance).ToString("C")) (you owe them)</span>
+                    }
+                </td>
+                <td>
+                    <div class="btn-group" role="group">
+                        @if (item.Balance != 0)
+                        {
+                            <form asp-action="SettleUp" style="display: inline;">
+                                <input type="hidden" name="friendId" value="@item.Friend.Id" />
+                                <button type="submit" class="btn btn-success" 
+                                        onclick="return confirm('Are you sure you want to settle up with @item.Friend.Username? This will mark all shared expenses as paid.');">
+                                    Settle Up
+                                </button>
+                            </form>
+                        }
+                        <form asp-action="Delete" style="display: inline;">
+                            <input type="hidden" name="id" value="@item.Friend.Id" />
+                            <button type="submit" class="btn btn-danger" 
+                                    onclick="return confirm('Are you sure you want to remove this friend?');">
+                                Remove Friend
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

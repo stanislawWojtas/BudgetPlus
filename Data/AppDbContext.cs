@@ -11,6 +11,8 @@ public class AppDbContext : DbContext
 	public DbSet<Friend> Freinds { get; set; }
 	public DbSet<Category> Categories { get; set; }
 	public DbSet<Share> Shares { get; set; }
+	
+	public DbSet<FriendRequest> FriendRequests { get; set;}
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
@@ -25,9 +27,9 @@ public class AppDbContext : DbContext
 
 
 		modelBuilder.Entity<Friend>()
-            .HasOne(f => f.FriendUser)
-            .WithMany()
-            .HasForeignKey(f => f.FriendUserId)
-            .OnDelete(DeleteBehavior.Restrict);
+			.HasOne(f => f.FriendUser)
+			.WithMany()
+			.HasForeignKey(f => f.FriendUserId)
+			.OnDelete(DeleteBehavior.Restrict);
 	}
 }

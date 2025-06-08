@@ -8,10 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using BudgetPlus.Data;
 using BudgetPlus.Models;
 using Microsoft.AspNetCore.Authorization;
+using BudgetPlus.Filters;
 
 namespace BudgetPlus.Controllers
 {
-    [Authorize]
+    [ServiceFilter(typeof(AdminFilter))]
     public class UsersController : Controller
     {
         private readonly AppDbContext _context;

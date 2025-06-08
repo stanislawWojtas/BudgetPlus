@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudgetPlus.Data;
 using BudgetPlus.Models;
-using Microsoft.AspNetCore.Authorization;
+using BudgetPlus.ViewModels;
+using BudgetPlus.Filters;
 
 namespace BudgetPlus.Controllers
 {
-    [Authorize]
+    [ServiceFilter(typeof(AuthFilter))]
     public class FriendsController : Controller
     {
         private readonly AppDbContext _context;
@@ -24,109 +20,64 @@ namespace BudgetPlus.Controllers
         // GET: Friends
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Freinds.Include(f => f.FriendUser).Include(f => f.User);
-            return View(await appDbContext.ToListAsync());
-        }
-
-        // GET: Friends/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
             {
-                return NotFound();
+                return RedirectToAction("Login", "Auth");
             }
 
-            var friend = await _context.Freinds
+            var friends = await _context.Freinds
                 .Include(f => f.FriendUser)
-                .Include(f => f.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (friend == null)
-            {
-                return NotFound();
-            }
+                .Where(f => f.UserId == userId)
+                .Select(f => new FriendBalanceViewModel
+                {
+                    Friend = f.FriendUser!,
+                    Balance = _context.Shares
+                        .Where(s => !s.isPaid && 
+                            ((s.OwedUserId == userId && s.Expense!.UserId == f.FriendUserId) ||
+                             (s.OwedUserId == f.FriendUserId && s.Expense!.UserId == userId)))
+                        .Sum(s => s.OwedUserId == userId ? -s.Amount : s.Amount)
+                })
+                .ToListAsync();
 
-            return View(friend);
+            return View(friends);
         }
 
-        // GET: Friends/Create
-        public IActionResult Create()
-        {
-            ViewData["FriendUserId"] = new SelectList(_context.Users, "Id", "Username");
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Username");
-            return View();
-        }
-
-        // POST: Friends/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserId,FriendUserId")] Friend friend)
+        public async Task<IActionResult> SettleUp(int friendId)
         {
-            if (ModelState.IsValid)
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
             {
-                _context.Add(friend);
+                return RedirectToAction("Login", "Auth");
+            }
+
+            //Start the transaction (all operation must be done to be saved)
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                // Set all unpaid shares between those users to paid ones
+                var sharesToSettle = await _context.Shares
+                    .Where(s => !s.isPaid &&
+                    ((s.OwedUserId == userId && s.Expense!.UserId == friendId) ||
+                    (s.OwedUserId == friendId && s.Expense!.UserId == userId)))
+                    .ToListAsync();
+
+                foreach (var share in sharesToSettle)
+                {
+                    share.isPaid = true;
+                }
+
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                await transaction.CommitAsync();
+                return RedirectToAction("Index");
             }
-            ViewData["FriendUserId"] = new SelectList(_context.Users, "Id", "Username", friend.FriendUserId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Username", friend.UserId);
-            return View(friend);
-        }
-
-        // GET: Friends/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
+            catch (Exception e)
             {
-                return NotFound();
+                await transaction.RollbackAsync();
+                return RedirectToAction("Index");
             }
-
-            var friend = await _context.Freinds.FindAsync(id);
-            if (friend == null)
-            {
-                return NotFound();
-            }
-            ViewData["FriendUserId"] = new SelectList(_context.Users, "Id", "Username", friend.FriendUserId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Username", friend.UserId);
-            return View(friend);
-        }
-
-        // POST: Friends/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,FriendUserId")] Friend friend)
-        {
-            if (id != friend.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(friend);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!FriendExists(friend.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["FriendUserId"] = new SelectList(_context.Users, "Id", "Username", friend.FriendUserId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Username", friend.UserId);
-            return View(friend);
         }
 
         // GET: Friends/Delete/5
@@ -154,19 +105,128 @@ namespace BudgetPlus.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var friend = await _context.Freinds.FindAsync(id);
+            var friend = await _context.Freinds
+                .Include(f => f.FriendUser)
+                .FirstOrDefaultAsync(f => f.Id == id);
             if (friend != null)
             {
+                //remove both Friend relations
                 _context.Freinds.Remove(friend);
-            }
 
+                var reverseFriend = await _context.Freinds
+                    .FirstOrDefaultAsync(f => f.UserId == friend.FriendUserId && f.FriendUserId == friend.UserId);
+
+                if (reverseFriend != null)
+                {
+                    _context.Freinds.Remove(reverseFriend);
+                }
+            }
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FriendExists(int id)
+        [HttpGet]
+        public IActionResult SendRequest() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> SendRequest(string username)
         {
-            return _context.Freinds.Any(e => e.Id == id);
+            var senderId = HttpContext.Session.GetInt32("UserId");
+            if (senderId == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+            var receiver = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            if (receiver == null)
+            {
+                ModelState.AddModelError("", "User not found");
+                return View();
+            }
+            if (username == HttpContext.Session.GetString("Username"))
+            {
+                ModelState.AddModelError("", "Cannot send request to yourself");
+                return View();
+            }
+
+            // checking if request already exist
+            var existingRequest = await _context.FriendRequests.AnyAsync(fr => (fr.SenderId == senderId && fr.ReceiverId == receiver.Id && fr.Status == "Pending") ||
+                                                                                (fr.SenderId == receiver.Id && fr.ReceiverId == senderId && fr.Status == "Pending"));
+            if (existingRequest)
+            {
+                ModelState.AddModelError("", "Friend request already exist");
+                return View();
+            }
+
+            // now we create the request
+            var friendRequest = new FriendRequest
+            {
+                SenderId = senderId.Value,
+                ReceiverId = receiver.Id
+            };
+            _context.FriendRequests.Add(friendRequest);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        // active requests for User
+        [HttpGet]
+        public async Task<IActionResult> Requests()
+        {
+            var currentUserId = HttpContext.Session.GetInt32("UserId");
+            if (currentUserId == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
+            var requests = await _context.FriendRequests
+                .Include(fr => fr.Sender)
+                .Where(fr => fr.ReceiverId == currentUserId && fr.Status == "Pending")
+                .ToListAsync();
+            return View(requests);
+        }
+
+        // methon
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RespondToRequest(int requestId, bool accept)
+        {
+            var currentUserId = HttpContext.Session.GetInt32("UserId");
+            if (currentUserId == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+            var request = await _context.FriendRequests
+                .FirstOrDefaultAsync(fr => fr.ReceiverId == currentUserId && requestId == fr.Id);
+
+            if (request == null)
+            {
+                return NotFound();
+            }
+
+            // adding users as friends
+            if (accept)
+            {
+                var friendship1 = new Friend
+                {
+                    UserId = request.SenderId,
+                    FriendUserId = request.ReceiverId
+                };
+                var friendship2 = new Friend
+                {
+                    UserId = request.ReceiverId,
+                    FriendUserId = request.SenderId
+                };
+                _context.Freinds.Add(friendship1);
+                _context.Freinds.Add(friendship2);
+                request.Status = "Accepted";
+            }
+            else
+            {
+                request.Status = "Rejected";
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
     }
 }

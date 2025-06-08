@@ -1,0 +1,43 @@
+@model IEnumerable<BudgetPlus.Models.Share>
+
+@{
+    ViewData["Title"] = "To Pay";
+}
+
+<h1>Expenses To Pay</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Amount</th>
+            <th>Expense Description</th>
+            <th>Category</th>
+            <th>Created By</th>
+            <th>Date</th>
+            <th>Pay</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Amount.ToString("C")</td>
+                <td>@item.Expense?.Description</td>
+                <td>@item.Expense?.Category?.Name</td>
+                <td>@item.Expense?.User?.Username</td>
+                <td>@item.Expense?.Date.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <form asp-action="Pay" style="display: inline;">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-success" 
+                                    onclick="return confirm('Are you sure you want to mark this as paid?');">
+                                Pay
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

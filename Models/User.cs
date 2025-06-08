@@ -15,6 +15,9 @@ public class User
 	public string PasswordHash { get; set; } = string.Empty;
 
 	[Required]
+	public bool IsAdmin { get; set; } = false;
+
+	[Required]
 	public string ApiToken { get; set; } = Guid.NewGuid().ToString();
 
 	public ICollection<Expense> Expenses { get; set; } = new List<Expense>(); 

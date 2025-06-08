@@ -1,31 +1,350 @@
-html {
-  font-size: 14px;
+/* Modern clean design */
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #1e40af;
+    --text-color: #1f2937;
+    --background-light: #f3f4f6;
+    --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+/* Navigation */
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+    font-weight: 600;
+    font-size: 1.5rem;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+a {
+    color: var(--primary-color);
+    transition: color 0.2s ease;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+a:hover {
+    color: var(--secondary-color);
 }
 
-body {
-  margin-bottom: 60px;
+/* Buttons */
+.btn-primary {
+    color: #fff;
+    background-color: var(--primary-color);
+    border-color: var(--secondary-color);
+    transition: all 0.2s ease;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-1px);
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+/* Navigation pills */
+.nav-pills .nav-link.active, 
+.nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: var(--primary-color);
+    border-color: var(--secondary-color);
+}
+
+/* Borders and shadows */
+.border-top {
+    border-top: 1px solid var(--background-light);
+}
+
+.border-bottom {
+    border-bottom: 1px solid var(--background-light);
+}
+
+.box-shadow {
+    box-shadow: 0 4px 6px -1px var(--shadow-color);
+    transition: box-shadow 0.2s ease;
+}
+
+.box-shadow:hover {
+    box-shadow: 0 6px 8px -1px var(--shadow-color);
+}
+
+/* Cards and containers */
+.card {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px var(--shadow-color);
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+/* Tables */
+.table {
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.table thead th {
+    background-color: var(--background-light);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* Footer */
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+    background-color: var(--background-light);
+    border-top: 1px solid var(--shadow-color);
+}
+
+/* Buttons and badges */
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+}
+
+.badge {
+    padding: 0.5em 1em;
+    font-weight: 500;
+    border-radius: 9999px;
+}
+
+/* Headers and Text Alignment */
+h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--primary-color);
+    display: inline-block;
+}
+
+/* Form styling */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    border-radius: 0.5rem;
+    border: 1px solid var(--background-light);
+    padding: 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+}
+
+/* Table enhancements */
+.table {
+    margin: 2rem 0;
+    background-color: white;
+}
+
+.table th {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    padding: 1rem;
+}
+
+.table td {
+    vertical-align: middle;
+    padding: 1rem;
+}
+
+/* Card enhancements */
+.card {
+    margin: 1.5rem 0;
+    border: none;
+}
+
+.card-header {
+    background-color: var(--background-light);
+    border-bottom: 2px solid var(--primary-color);
+    padding: 1rem 1.5rem;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+/* Container spacing */
+.container {
+    padding: 2rem 1rem;
+}
+
+/* Button group spacing */
+.btn-group {
+    gap: 0.5rem;
+}
+
+/* Badge enhancements */
+.badge {
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+}
+
+.badge.bg-success {
+    background-color: #10b981 !important;
+}
+
+.badge.bg-danger {
+    background-color: #ef4444 !important;
+}
+
+/* Alert styling */
+.alert {
+    border-radius: 0.5rem;
+    border: none;
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+/* List group styling */
+.list-group {
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.list-group-item {
+    border-left: none;
+    border-right: none;
+    padding: 1rem 1.5rem;
+}
+
+/* Utility classes */
+.text-center {
+    text-align: center !important;
+}
+
+.mt-large {
+    margin-top: 3rem;
+}
+
+.mb-large {
+    margin-bottom: 3rem;
+}
+
+/* Form validation messages */
+.text-danger {
+    color: #ef4444 !important;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Select2 customization if you're using it */
+.select2-container--default .select2-selection--single {
+    border-radius: 0.5rem !important;
+    height: calc(1.5em + 1.5rem) !important;
+    border-color: var(--background-light) !important;
+}
+
+/* Responsive text */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.25rem;
+    }
+
+    .container {
+        padding: 1rem 0.5rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .table th, 
+    .table td {
+        padding: 0.75rem;
+    }
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, var(--background-light) 0%, #ffffff 100%);
+    border-radius: 1rem;
+    margin: 2rem 0;
+}
+
+.hero-section h1 {
+    border-bottom: none;
+    color: var(--primary-color);
+}
+
+.hero-section .lead {
+    font-size: 1.25rem;
+    color: var(--text-color);
+}
+
+/* Feature Cards */
+.feature-card {
+    transition: all 0.3s ease;
+    border: none;
+    background: white;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.feature-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.feature-text {
+    color: #666;
+}
+
+/* Dashboard Section */
+.dashboard-section {
+    padding: 2rem 0;
+}
+
+.quick-action-card {
+    background: white;
+    border: none;
+}
+
+.quick-action-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.quick-action-card .btn {
+    width: 80%;
+    max-width: 300px;
+}
+
+/* CTA Buttons */
+.cta-buttons {
+    margin: 2rem 0;
+}
+
+.btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
 }

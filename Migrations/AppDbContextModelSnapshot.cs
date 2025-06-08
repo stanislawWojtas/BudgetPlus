@@ -86,6 +86,34 @@ namespace BudgetPlus.Migrations
                     b.ToTable("Freinds");
                 });
 
+            modelBuilder.Entity("BudgetPlus.Models.FriendRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ReceiverId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SenderId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("FriendRequests");
+                });
+
             modelBuilder.Entity("BudgetPlus.Models.Share", b =>
                 {
                     b.Property<int>("Id")
@@ -122,6 +150,9 @@ namespace BudgetPlus.Migrations
                     b.Property<string>("ApiToken")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
@@ -173,6 +204,25 @@ namespace BudgetPlus.Migrations
                     b.Navigation("FriendUser");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BudgetPlus.Models.FriendRequest", b =>
+                {
+                    b.HasOne("BudgetPlus.Models.User", "Receiver")
+                        .WithMany()
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BudgetPlus.Models.User", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("BudgetPlus.Models.Share", b =>

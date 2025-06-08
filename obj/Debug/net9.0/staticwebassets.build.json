@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "cbHffCdhObtmWBNZKgMJElmej6liRR1NEd12mMg2w8M=",
+  "Hash": "eCrXKoOd8FHpW7xy5+EJgM7VAXgU/FDzHZKfO/iHE0g=",
   "Source": "BudgetPlus",
   "BasePath": "_content/BudgetPlus",
   "Mode": "Default",
@@ -731,12 +731,12 @@
       "OriginalItemSpec": "C:\\Users\\wstas\\Studia\\studia semestr 4\\Programowanie zaawansowane 2\\project\\BudgetPlus\\wwwroot\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Identity": "C:\\Users\\wstas\\Studia\\studia semestr 4\\Programowanie zaawansowane 2\\project\\BudgetPlus\\obj\\Debug\\net9.0\\compressed\\idk63zgc2y-b9sayid5wm.gz",
+      "Identity": "C:\\Users\\wstas\\Studia\\studia semestr 4\\Programowanie zaawansowane 2\\project\\BudgetPlus\\obj\\Debug\\net9.0\\compressed\\idk63zgc2y-rbusguyqto.gz",
       "SourceId": "BudgetPlus",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\wstas\\Studia\\studia semestr 4\\Programowanie zaawansowane 2\\project\\BudgetPlus\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/BudgetPlus",
-      "RelativePath": "css/site#[.{fingerprint=b9sayid5wm}]?.css.gz",
+      "RelativePath": "css/site#[.{fingerprint=rbusguyqto}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -745,8 +745,8 @@
       "RelatedAsset": "C:\\Users\\wstas\\Studia\\studia semestr 4\\Programowanie zaawansowane 2\\project\\BudgetPlus\\wwwroot\\css\\site.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "0suozzrugb",
-      "Integrity": "0FC1RbVkLkwKhJ1oi+r2Hw4Tm9av6DyJeo95YVvfA3Y=",
+      "Fingerprint": "rj2v7iuwmu",
+      "Integrity": "p+1Ctv2vn3k4xd9mUoQgC18zXPDzf913I13ch003LH8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\wstas\\Studia\\studia semestr 4\\Programowanie zaawansowane 2\\project\\BudgetPlus\\wwwroot\\css\\site.css"
@@ -1417,8 +1417,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "b9sayid5wm",
-      "Integrity": "j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=",
+      "Fingerprint": "rbusguyqto",
+      "Integrity": "h3DtV4fXCul46qdIHa31IRD61OpRtNY/ei2QO5DOqyk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -2752,7 +2752,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 12:02:38 GMT"
+          "Value": "Sun, 08 Jun 2025 17:29:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2805,7 +2805,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 12:02:38 GMT"
+          "Value": "Sun, 08 Jun 2025 17:29:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2842,7 +2842,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 12:02:38 GMT"
+          "Value": "Sun, 08 Jun 2025 17:29:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2889,7 +2889,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 12:02:38 GMT"
+          "Value": "Sun, 08 Jun 2025 17:29:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2950,7 +2950,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 12:02:38 GMT"
+          "Value": "Sun, 08 Jun 2025 17:29:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2995,7 +2995,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 12:02:38 GMT"
+          "Value": "Sun, 08 Jun 2025 17:29:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3050,7 +3050,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 12:02:38 GMT"
+          "Value": "Sun, 08 Jun 2025 17:29:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3111,7 +3111,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 12:02:38 GMT"
+          "Value": "Sun, 08 Jun 2025 17:29:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3156,7 +3156,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 12:02:38 GMT"
+          "Value": "Sun, 08 Jun 2025 17:29:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3211,7 +3211,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 12:02:38 GMT"
+          "Value": "Sun, 08 Jun 2025 17:29:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3264,7 +3264,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 12:02:38 GMT"
+          "Value": "Sun, 08 Jun 2025 17:29:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3301,7 +3301,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 12:02:38 GMT"
+          "Value": "Sun, 08 Jun 2025 17:29:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3324,13 +3324,13 @@
       ]
     },
     {
-      "Route": "css/site.b9sayid5wm.css",
-      "AssetFile": "C:\\Users\\wstas\\Studia\\studia semestr 4\\Programowanie zaawansowane 2\\project\\BudgetPlus\\obj\\Debug\\net9.0\\compressed\\idk63zgc2y-b9sayid5wm.gz",
+      "Route": "css/site.css",
+      "AssetFile": "C:\\Users\\wstas\\Studia\\studia semestr 4\\Programowanie zaawansowane 2\\project\\BudgetPlus\\obj\\Debug\\net9.0\\compressed\\idk63zgc2y-rbusguyqto.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.003134796238"
+          "Quality": "0.000603864734"
         }
       ],
       "ResponseHeaders": [
@@ -3340,19 +3340,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "318"
+          "Value": "1655"
         },
         {
           "Name": "ETag",
-          "Value": "\"0FC1RbVkLkwKhJ1oi+r2Hw4Tm9av6DyJeo95YVvfA3Y=\""
+          "Value": "\"p+1Ctv2vn3k4xd9mUoQgC18zXPDzf913I13ch003LH8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 11:08:20 GMT"
+          "Value": "Sun, 08 Jun 2025 17:40:14 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
+          "Value": "no-cache"
         },
         {
           "Name": "Content-Encoding",
@@ -3368,26 +3368,18 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=\""
+          "Value": "W/\"h3DtV4fXCul46qdIHa31IRD61OpRtNY/ei2QO5DOqyk=\""
         }
       ],
       "EndpointProperties": [
         {
-          "Name": "fingerprint",
-          "Value": "b9sayid5wm"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
-        },
-        {
           "Name": "integrity",
-          "Value": "sha256-j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg="
+          "Value": "sha256-h3DtV4fXCul46qdIHa31IRD61OpRtNY/ei2QO5DOqyk="
         }
       ]
     },
     {
-      "Route": "css/site.b9sayid5wm.css",
+      "Route": "css/site.css",
       "AssetFile": "C:\\Users\\wstas\\Studia\\studia semestr 4\\Programowanie zaawansowane 2\\project\\BudgetPlus\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -3397,7 +3389,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "667"
+          "Value": "6333"
         },
         {
           "Name": "Content-Type",
@@ -3405,11 +3397,156 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=\""
+          "Value": "\"h3DtV4fXCul46qdIHa31IRD61OpRtNY/ei2QO5DOqyk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 11:08:20 GMT"
+          "Value": "Sun, 08 Jun 2025 17:40:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-h3DtV4fXCul46qdIHa31IRD61OpRtNY/ei2QO5DOqyk="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.css.gz",
+      "AssetFile": "C:\\Users\\wstas\\Studia\\studia semestr 4\\Programowanie zaawansowane 2\\project\\BudgetPlus\\obj\\Debug\\net9.0\\compressed\\idk63zgc2y-rbusguyqto.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1655"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"p+1Ctv2vn3k4xd9mUoQgC18zXPDzf913I13ch003LH8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 08 Jun 2025 17:40:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-p+1Ctv2vn3k4xd9mUoQgC18zXPDzf913I13ch003LH8="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.rbusguyqto.css",
+      "AssetFile": "C:\\Users\\wstas\\Studia\\studia semestr 4\\Programowanie zaawansowane 2\\project\\BudgetPlus\\obj\\Debug\\net9.0\\compressed\\idk63zgc2y-rbusguyqto.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000603864734"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1655"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"p+1Ctv2vn3k4xd9mUoQgC18zXPDzf913I13ch003LH8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 08 Jun 2025 17:40:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"h3DtV4fXCul46qdIHa31IRD61OpRtNY/ei2QO5DOqyk=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rbusguyqto"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-h3DtV4fXCul46qdIHa31IRD61OpRtNY/ei2QO5DOqyk="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.rbusguyqto.css",
+      "AssetFile": "C:\\Users\\wstas\\Studia\\studia semestr 4\\Programowanie zaawansowane 2\\project\\BudgetPlus\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6333"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"h3DtV4fXCul46qdIHa31IRD61OpRtNY/ei2QO5DOqyk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 08 Jun 2025 17:40:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3419,7 +3556,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "b9sayid5wm"
+          "Value": "rbusguyqto"
         },
         {
           "Name": "label",
@@ -3427,13 +3564,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg="
+          "Value": "sha256-h3DtV4fXCul46qdIHa31IRD61OpRtNY/ei2QO5DOqyk="
         }
       ]
     },
     {
-      "Route": "css/site.b9sayid5wm.css.gz",
-      "AssetFile": "C:\\Users\\wstas\\Studia\\studia semestr 4\\Programowanie zaawansowane 2\\project\\BudgetPlus\\obj\\Debug\\net9.0\\compressed\\idk63zgc2y-b9sayid5wm.gz",
+      "Route": "css/site.rbusguyqto.css.gz",
+      "AssetFile": "C:\\Users\\wstas\\Studia\\studia semestr 4\\Programowanie zaawansowane 2\\project\\BudgetPlus\\obj\\Debug\\net9.0\\compressed\\idk63zgc2y-rbusguyqto.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3442,7 +3579,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "318"
+          "Value": "1655"
         },
         {
           "Name": "Content-Type",
@@ -3450,11 +3587,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"0FC1RbVkLkwKhJ1oi+r2Hw4Tm9av6DyJeo95YVvfA3Y=\""
+          "Value": "\"p+1Ctv2vn3k4xd9mUoQgC18zXPDzf913I13ch003LH8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 11:08:20 GMT"
+          "Value": "Sun, 08 Jun 2025 17:40:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3472,7 +3609,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "b9sayid5wm"
+          "Value": "rbusguyqto"
         },
         {
           "Name": "label",
@@ -3480,144 +3617,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-0FC1RbVkLkwKhJ1oi+r2Hw4Tm9av6DyJeo95YVvfA3Y="
-        }
-      ]
-    },
-    {
-      "Route": "css/site.css",
-      "AssetFile": "C:\\Users\\wstas\\Studia\\studia semestr 4\\Programowanie zaawansowane 2\\project\\BudgetPlus\\obj\\Debug\\net9.0\\compressed\\idk63zgc2y-b9sayid5wm.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.003134796238"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "318"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"0FC1RbVkLkwKhJ1oi+r2Hw4Tm9av6DyJeo95YVvfA3Y=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 11:08:20 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg="
-        }
-      ]
-    },
-    {
-      "Route": "css/site.css",
-      "AssetFile": "C:\\Users\\wstas\\Studia\\studia semestr 4\\Programowanie zaawansowane 2\\project\\BudgetPlus\\wwwroot\\css\\site.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "667"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 11:08:20 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg="
-        }
-      ]
-    },
-    {
-      "Route": "css/site.css.gz",
-      "AssetFile": "C:\\Users\\wstas\\Studia\\studia semestr 4\\Programowanie zaawansowane 2\\project\\BudgetPlus\\obj\\Debug\\net9.0\\compressed\\idk63zgc2y-b9sayid5wm.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "318"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"0FC1RbVkLkwKhJ1oi+r2Hw4Tm9av6DyJeo95YVvfA3Y=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 11:08:20 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-0FC1RbVkLkwKhJ1oi+r2Hw4Tm9av6DyJeo95YVvfA3Y="
+          "Value": "sha256-p+1Ctv2vn3k4xd9mUoQgC18zXPDzf913I13ch003LH8="
         }
       ]
     },

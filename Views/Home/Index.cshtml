@@ -1,8 +1,80 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
+    var logged = Context.Session.GetString("logged") == "true";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@if (!logged)
+{
+    <div class="hero-section text-center">
+        <h1 class="display-4 mb-4">Welcome to BudgetPlus</h1>
+        <p class="lead mb-5">The smart way to manage shared expenses with friends</p>
+        <div class="cta-buttons">
+            <a asp-controller="Auth" asp-action="Login" class="btn btn-primary btn-lg me-3">Login</a>
+            <a asp-controller="Auth" asp-action="Register" class="btn btn-outline-primary btn-lg">Register</a>
+        </div>
+    </div>
+
+    <div class="features-section mt-5">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-people-fill feature-icon"></i>
+                        <h3 class="feature-title">Share Expenses</h3>
+                        <p class="feature-text">Split bills easily with friends and keep track of shared expenses</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-graph-up feature-icon"></i>
+                        <h3 class="feature-title">Track Balances</h3>
+                        <p class="feature-text">See who owes what at a glance with clear balance tracking</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-check2-circle feature-icon"></i>
+                        <h3 class="feature-title">Settle Up</h3>
+                        <p class="feature-text">Easily settle debts with friends and keep your finances organized</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="dashboard-section">
+        <div class="text-center mb-4">
+            <h1 class="display-4">Your Dashboard</h1>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="quick-action-card card h-100">
+                    <div class="card-body text-center">
+                        <h3>Create New Expense</h3>
+                        <p class="text-muted">Split a new bill with your friends</p>
+                        <a asp-controller="Expenses" asp-action="Create" class="btn btn-primary btn-lg mt-3">
+                            <i class="bi bi-plus-circle"></i> New Expense
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="quick-action-card card h-100">
+                    <div class="card-body text-center">
+                        <h3>View Expenses</h3>
+                        <p class="text-muted">Check your expenses and balances</p>
+                        <a asp-controller="Shares" asp-action="MyExpenses" class="btn btn-primary btn-lg mt-3">
+                            <i class="bi bi-list"></i> My Expenses
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

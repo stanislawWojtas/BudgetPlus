@@ -1,17 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudgetPlus.Data;
 using BudgetPlus.Models;
-using Microsoft.AspNetCore.Authorization;
+using BudgetPlus.Filters;
 
 namespace BudgetPlus.Controllers
 {
-    [Authorize]
+    [ServiceFilter(typeof(AdminFilter))]
     public class CategoriesController : Controller
     {
         private readonly AppDbContext _context;

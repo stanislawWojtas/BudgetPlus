@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudgetPlus.Data;
 using BudgetPlus.Models;
-using Microsoft.AspNetCore.Authorization;
+using BudgetPlus.Filters;
 
 namespace BudgetPlus.Controllers
 {
-    [Authorize]
+    [ServiceFilter(typeof(AuthFilter))]
     public class SharesController : Controller
     {
         private readonly AppDbContext _context;
@@ -21,148 +17,74 @@ namespace BudgetPlus.Controllers
             _context = context;
         }
 
-        // GET: Shares
-        public async Task<IActionResult> Index()
+
+        // list of shares to pay by logged user
+        [HttpGet]
+        public async Task<IActionResult> ToPay()
         {
-            var appDbContext = _context.Shares.Include(s => s.Expense).Include(s => s.OwedUser);
-            return View(await appDbContext.ToListAsync());
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
+            var unPaidShares = await _context.Shares
+                .Include(s => s.Expense)
+                    .ThenInclude(e => e.User)
+                .Include(s => s.Expense)
+                    .ThenInclude(e => e.Category)
+                .Where(s => s.OwedUserId == userId && !s.isPaid)
+                .ToListAsync();
+            return View(unPaidShares);
+
         }
 
-        // GET: Shares/Details/5
-        public async Task<IActionResult> Details(int? id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Pay(int id)
         {
-            if (id == null)
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
             {
-                return NotFound();
+                return RedirectToAction("Auth", "Login");
             }
 
             var share = await _context.Shares
-                .Include(s => s.Expense)
-                .Include(s => s.OwedUser)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(s => s.Id == id && s.OwedUserId == userId.Value);
+
             if (share == null)
             {
                 return NotFound();
             }
 
-            return View(share);
-        }
-
-        // GET: Shares/Create
-        public IActionResult Create()
-        {
-            ViewData["ExpenseId"] = new SelectList(_context.Expenses, "Id", "Description");
-            ViewData["OwedUserId"] = new SelectList(_context.Users, "Id", "Username");
-            return View();
-        }
-
-        // POST: Shares/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ExpenseId,OwedUserId,Amount,isPaid")] Share share)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(share);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["ExpenseId"] = new SelectList(_context.Expenses, "Id", "Description", share.ExpenseId);
-            ViewData["OwedUserId"] = new SelectList(_context.Users, "Id", "Username", share.OwedUserId);
-            return View(share);
-        }
-
-        // GET: Shares/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var share = await _context.Shares.FindAsync(id);
-            if (share == null)
-            {
-                return NotFound();
-            }
-            ViewData["ExpenseId"] = new SelectList(_context.Expenses, "Id", "Description", share.ExpenseId);
-            ViewData["OwedUserId"] = new SelectList(_context.Users, "Id", "Username", share.OwedUserId);
-            return View(share);
-        }
-
-        // POST: Shares/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ExpenseId,OwedUserId,Amount,isPaid")] Share share)
-        {
-            if (id != share.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(share);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ShareExists(share.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["ExpenseId"] = new SelectList(_context.Expenses, "Id", "Description", share.ExpenseId);
-            ViewData["OwedUserId"] = new SelectList(_context.Users, "Id", "Username", share.OwedUserId);
-            return View(share);
-        }
-
-        // GET: Shares/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var share = await _context.Shares
-                .Include(s => s.Expense)
-                .Include(s => s.OwedUser)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (share == null)
-            {
-                return NotFound();
-            }
-
-            return View(share);
-        }
-
-        // POST: Shares/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var share = await _context.Shares.FindAsync(id);
-            if (share != null)
-            {
-                _context.Shares.Remove(share);
-            }
-
+            // pay the share
+            share.isPaid = true;
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            return RedirectToAction("ToPay");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> MyExpenses()
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
+            var paidShares = await _context.Shares
+                .Include(s => s.Expense)
+                    .ThenInclude(e => e.User)
+                .Include(s => s.Expense)
+                    .ThenInclude(s => s.Category)
+                .Where(s => s.OwedUserId == userId && s.isPaid)
+                .ToListAsync();
+
+            ViewBag.TotalExpenses = paidShares.Sum(s => s.Amount);
+            return View(paidShares);
+        }
+
 
         private bool ShareExists(int id)
         {

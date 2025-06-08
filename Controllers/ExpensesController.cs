@@ -1,17 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BudgetPlus.Data;
 using BudgetPlus.Models;
-using Microsoft.AspNetCore.Authorization;
+using BudgetPlus.Filters;
+
 
 namespace BudgetPlus.Controllers
 {
-    [Authorize]
+    [ServiceFilter(typeof(AuthFilter))]
     public class ExpensesController : Controller
     {
         private readonly AppDbContext _context;
@@ -21,38 +18,26 @@ namespace BudgetPlus.Controllers
             _context = context;
         }
 
-        // GET: Expenses
-        public async Task<IActionResult> Index()
-        {
-            var appDbContext = _context.Expenses.Include(e => e.Category).Include(e => e.User);
-            return View(await appDbContext.ToListAsync());
-        }
-
         // GET: Expenses/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var expense = await _context.Expenses
-                .Include(e => e.Category)
-                .Include(e => e.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (expense == null)
-            {
-                return NotFound();
-            }
-
-            return View(expense);
-        }
-
         // GET: Expenses/Create
+        [HttpGet]
         public IActionResult Create()
         {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
+            // Share can be added only to friends
+            var friends = _context.Freinds
+                .Where(f => f.UserId == userId.Value)
+                .Select(f => f.FriendUser)
+                .ToList();
+
+            ViewBag.UserId = userId.Value;
+            ViewBag.Friends = friends; //friends list to View
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Username");
             return View();
         }
 
@@ -61,75 +46,81 @@ namespace BudgetPlus.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserId,Amount,Date,CategoryId,Description")] Expense expense)
+        public async Task<IActionResult> Create([Bind("Id,Amount,CategoryId,Description")] Expense expense, List<int> sharedUserIds)
         {
-            if (ModelState.IsValid)
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
             {
-                _context.Add(expense);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", expense.CategoryId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Username", expense.UserId);
-            return View(expense);
-        }
-
-        // GET: Expenses/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
+                return RedirectToAction("Login", "Auth");
             }
 
-            var expense = await _context.Expenses.FindAsync(id);
-            if (expense == null)
+            if (string.IsNullOrEmpty(expense.Description))
             {
-                return NotFound();
+                ModelState.AddModelError("Description", "Description is required");
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", expense.CategoryId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Username", expense.UserId);
-            return View(expense);
-        }
 
-        // POST: Expenses/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,Amount,Date,CategoryId,Description")] Expense expense)
-        {
-            if (id != expense.Id)
+            if (sharedUserIds == null || !sharedUserIds.Any())
             {
-                return NotFound();
+                ModelState.AddModelError("sharedUserIds", "At least one participant must be selected");
+                PrepareViewData(userId.Value, expense);
+                return View(expense);
             }
+
+            // Validate if all users exist
+            var validUsers = await _context.Users
+                .Where(u => sharedUserIds.Contains(u.Id))
+                .Select(u => u.Id)
+                .ToListAsync();
+
+            if (validUsers.Count != sharedUserIds.Count)
+            {
+                ModelState.AddModelError("", "Invalid user selection");
+                PrepareViewData(userId.Value, expense);
+                return View(expense);
+            }
+
+            expense.UserId = userId.Value;
+            expense.Date = DateTime.Now;
 
             if (ModelState.IsValid)
             {
+                using var transaction = await _context.Database.BeginTransactionAsync();
                 try
                 {
-                    _context.Update(expense);
+                    _context.Expenses.Add(expense);
                     await _context.SaveChangesAsync();
+
+                    decimal sharedAmount = expense.Amount / sharedUserIds.Count;
+
+                    var shares = sharedUserIds.Select(participantId => new Share
+                    {
+                        ExpenseId = expense.Id,
+                        OwedUserId = participantId,
+                        Amount = sharedAmount,
+                        isPaid = participantId == userId.Value
+                    }).ToList();
+
+                    _context.Shares.AddRange(shares);
+                    await _context.SaveChangesAsync();
+
+                    await transaction.CommitAsync();
+                    return RedirectToAction("Details", new {id = expense.Id});
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception ex)
                 {
-                    if (!ExpenseExists(expense.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    await transaction.RollbackAsync();
+                    ModelState.AddModelError("", "Error occurred while saving the expense: " + ex.Message);
+                    PrepareViewData(userId.Value, expense);
+                    return View(expense);
                 }
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", expense.CategoryId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Username", expense.UserId);
+
+            PrepareViewData(userId.Value, expense);
             return View(expense);
         }
 
         // GET: Expenses/Delete/5
+            [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -161,12 +152,37 @@ namespace BudgetPlus.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("MyExpenses", "Shares");
         }
 
-        private bool ExpenseExists(int id)
+        public async Task<IActionResult> Details(int? id)
         {
-            return _context.Expenses.Any(e => e.Id == id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var expense = await _context.Expenses
+                .Include(e => e.Category)
+                .Include(e => e.User)
+                .Include(e => e.Shares) // share for this expense
+                .ThenInclude(s => s.OwedUser)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (expense == null || expense.UserId != HttpContext.Session.GetInt32("UserId"))
+            {
+                return NotFound();
+            }
+            return View(expense);
+        }
+
+        private void PrepareViewData(int userId, Expense expense)
+        {
+            ViewBag.Friends = _context.Freinds
+                .Where(f => f.UserId == userId)
+                .Select(f => f.FriendUser)
+                .ToList();
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", expense.CategoryId);
+            ViewBag.UserId = userId;
         }
     }
 }

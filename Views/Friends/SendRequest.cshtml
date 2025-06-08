@@ -1,0 +1,12 @@
+@model string
+
+<h2>Send Friend Request</h2>
+
+<form asp-action="SendRequest" method="post" autocomplete="off">
+    <div class="form-group">
+        <label for="username">Friend's Username:</label>
+        <input type="text" name="username" class="form-control" required />
+    </div>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <button type="submit" class="btn btn-primary">Send Request</button>
+</form>
