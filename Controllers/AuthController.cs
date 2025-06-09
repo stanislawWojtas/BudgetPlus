@@ -30,6 +30,13 @@ public class AuthController : Controller
 			return View();
 		}
 
+		var passwordValidation = ValidatePassword(password);
+		if (!passwordValidation.IsValid)
+		{
+			ViewBag.ErrorMessage = passwordValidation.ErrorMessage;
+			return View();
+		}
+
 		if (_context.Users.Any(u => u.Username == username))
 		{
 			ViewBag.ErrorMessage = "User already exists.";
@@ -47,6 +54,23 @@ public class AuthController : Controller
 		await _context.SaveChangesAsync();
 		ViewBag.SuccessMessage = "Registration successful! You can now log in.";
 		return await Login(username, password);
+	}
+
+	private (bool IsValid, string ErrorMessage) ValidatePassword(string password)
+	{
+		if (password.Length < 8)
+		{
+			return (false, "Password must contain at least 8 characters");
+		}
+		if (!password.Any(char.IsUpper))
+		{
+			return (false, "Password must contain at least one uppercase letter");
+		}
+		if (!password.Any(char.IsDigit))
+		{
+			return (false, "Password must contain at least one number");
+		}
+		return (true, string.Empty);
 	}
 
 	[HttpGet("login")]
