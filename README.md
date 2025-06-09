@@ -26,20 +26,19 @@ BudgetPlus is a web application that helps users manage and split expenses with 
 - **Backend**
   - ASP.NET Core MVC 7.0
   - Entity Framework Core
-  - SQL Server
+  - SQLite
   - C# 10
 
 - **Frontend**
   - Bootstrap 5
   - HTML5/CSS3
-  - JavaScript
-
+  - 
 ## Getting Started
 
 ### Prerequisites
 
 - .NET 7.0 SDK
-- SQL Server
+- SQLite
 - Visual Studio Code or Visual Studio 2022
 
 ### Installation
