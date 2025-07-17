@@ -188,6 +188,15 @@ h1 {
     gap: 0.5rem;
 }
 
+.name-highlight{
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 1rem 0;
+    text-align: center;
+    letter-spacing: 0.03em;
+}
+
 /* Badge enhancements */
 .badge {
     font-size: 0.85rem;

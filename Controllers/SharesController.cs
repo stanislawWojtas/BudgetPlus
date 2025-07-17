@@ -82,6 +82,14 @@ namespace BudgetPlus.Controllers
                 .ToListAsync();
 
             ViewBag.TotalExpenses = paidShares.Sum(s => s.Amount);
+
+            var currentMonth = DateTime.Now.Month;
+            var currentYear = DateTime.Now.Year;
+
+            var monthlyExpenses = paidShares
+                .Where(s => s.Expense.Date.Month == currentMonth && s.Expense.Date.Year == currentYear).ToList();
+            ViewBag.MonthlyExpenses = monthlyExpenses.Sum(s => s.Amount);
+            
             return View(paidShares);
         }
 

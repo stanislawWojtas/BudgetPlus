@@ -1,9 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Home";
     var logged = Context.Session.GetString("logged") == "true";
+    var isAdmin = Context.Session.GetString("IsAdmin") == "true";
+
 }
 
-@if (!logged)
+@if (!logged && !isAdmin)
 {
     <div class="hero-section text-center">
         <h1 class="display-4 mb-4">Welcome to BudgetPlus</h1>
@@ -40,6 +42,35 @@
                         <i class="bi bi-check2-circle feature-icon"></i>
                         <h3 class="feature-title">Settle Up</h3>
                         <p class="feature-text">Easily settle debts with friends and keep your finances organized</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else if(isAdmin){
+    <div class="admin-dashboard-section text-center">
+        <h1 class="display-4 mb-4">Admin Dashboard</h1>
+        <div class="row justify-content-center g-4">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3>Manage Users</h3>
+                        <p class="text-muted">View, add, or remove users</p>
+                        <a asp-controller="Users" asp-action="Index" class="btn btn-primary btn-lg mt-3">
+                            <i class="bi bi-people"></i> Manage Users
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3>Manage Categories</h3>
+                        <p class="text-muted">Edit or organize expense categories</p>
+                        <a asp-controller="Categories" asp-action="Index" class="btn btn-primary btn-lg mt-3">
+                            <i class="bi bi-tags"></i> Manage Categories
+                        </a>
                     </div>
                 </div>
             </div>
